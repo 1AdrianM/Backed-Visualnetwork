@@ -38,11 +38,11 @@ const {description, postedBy} = req.body
 
 let{img} = req.body;
 
-if( !description ||!postedBy || !img) return res.status(400).json({message:"Please fill the fileds"})
+if( !description ||!postedBy || !img) return res.status(400).json({message:"Please fill the fileds"});
 
 const user = await User.findById(postedBy);
 		if (!user) {
-			return res.status(404).json({ error: "User not found" });
+			return res.status(400).json({ error: "User not found" });
 		}
 
 		if (user._id.toString() !== req.user._id.toString()) {

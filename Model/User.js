@@ -12,9 +12,9 @@ profile_picture:{
      required: true
     },
 
-    Fullname: { 
-    type : String 
-},
+    FullName: { 
+    type : String,
+    required:true},
 
 Email:{
     type:String,

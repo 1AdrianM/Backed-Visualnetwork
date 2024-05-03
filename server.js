@@ -2,6 +2,7 @@ require('dotenv').config({path: './Config/.env'});
 const express = require('express')
 const app = express();
 const path =require('path')
+const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const ConnectDb = require('./Config/DbConn')
 const cors = require( 'cors' );
@@ -17,6 +18,7 @@ cloudinary.config({
 	api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 app.use(cors(corsOptions))
+app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(express.json()) // Allows us to handle json
 
@@ -32,7 +34,7 @@ app.use('/api/post', require("./Routes/postRoute"))
 app.all("*",(req, res) =>{
 res.status(404)
 if(req.accepts('html')) {
-    res.sendFile(path.join( __dirname + "404.html"));
+    res.sendFile(path.join( __dirname + "Views/404.html"));
 }
 else if(req.accepts("json")) {
     res.json({Message : "404 Not found" })
